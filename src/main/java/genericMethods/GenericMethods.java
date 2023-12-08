@@ -31,6 +31,7 @@ public class GenericMethods
 	public String childWindow;
 	
 
+	
 	/**
 	   * this method is used for common clickable functionality in webapplication
 	   * <p>                                  
