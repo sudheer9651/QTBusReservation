@@ -74,15 +74,12 @@ public class GenericMethods
 		    
  // mousehover actions done here in this method
 		    
-		public void MoveToElement(By locator) {
-
+		public void MoveToElement(By locator) 
+		{
 		    WebElement ele = driver.findElement(locator);
-
 			Actions act = new Actions(driver);
-
 			act.moveToElement(ele).perform();
-
-			}
+		}
 		
 		/**This method used for Explicity Wait..
 		 * <p>
@@ -93,7 +90,6 @@ public class GenericMethods
 		{	
 			WebElement firstResult = new WebDriverWait(driver, Duration.ofSeconds(time))
 			        .until(ExpectedConditions.elementToBeClickable((element)));	
-			
 		}
 		
 		/**This method used for sending the text in the text field...
@@ -103,24 +99,23 @@ public class GenericMethods
  		 * text means sending the data */
 		public boolean enterText(By elementLocator, String text)
 		{
-			
 			if(elementEnable(elementLocator) & elementDisplay(elementLocator))
 			{
-				try
-				{
-					driver.findElement(elementLocator).sendKeys(text);
-					return true;
+					try
+					{
+						driver.findElement(elementLocator).sendKeys(text);
+						return true;
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+						return false;
+					}
 				}
-				catch(Exception e)
+				else
 				{
-					e.printStackTrace();
 					return false;
 				}
-			}
-			else
-			{
-				return false;
-			}
 		}
 		
 		
@@ -378,13 +373,13 @@ public class GenericMethods
 	 * <p>
 	 * parameters num means page scroll down to end number.
 	 */
-	public void Scroll_dwn(int num)
+	public void jsScroll_dwn(int num)
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, num)");
 	}
 	
-	public void Scroll_up(int num)
+	public void jsScroll_up(int num)
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, num)");
@@ -404,7 +399,10 @@ public class GenericMethods
 	 * <p>excellvalue means table column value
 	 * <p>excellname means table column header
 	 */
-			public int   Web_tables_text(By tablename, String  Excellvalue , String ExcolName ) {
+	
+	
+	/* public int   Web_tables_text(By tablename, String  Excellvalue , String ExcolName ) 
+			{
 			//boolean result = false;
 			int row =-1;
 					WebElement table = driver.findElement(tablename);
@@ -435,6 +433,7 @@ public class GenericMethods
 				}
 				return row;
 			}
+	*/
 	
 			/**This method used for Accept the popup...
 			 */
@@ -522,6 +521,19 @@ public class GenericMethods
 				return driver.getTitle();
 			}
 			
+
+			/** using this method for delay in seconds */
+			public void delay(int timesec) {
+				
+				long start = System.currentTimeMillis();
+				long end = start + timesec * 1000;
+				while (System.currentTimeMillis() < end)
+				{
+				   
+				}
+
+			}
+			
 			/** using this method for exceplicity wait */
 			public void Waits(int time) {
 				wait = new WebDriverWait(driver, Duration.ofSeconds(time));
@@ -533,12 +545,12 @@ public class GenericMethods
 			}
 			
 			/** using this method for wait after element is clickable */
-			public void elementClickable(By locator) {
+			public void ewaitElementClickable(By locator) {
 				wait.until(ExpectedConditions.elementToBeClickable(locator));
 			}
 			
 			/** using this method for wait after element is visiblity */
-			public void visibilityOfElement(By locator) {
+			public void ewaitVisibilityOfElement(By locator) {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 			}
 			
@@ -562,18 +574,6 @@ public class GenericMethods
 				else
 					driver.switchTo().window(parentWindow);
 			}
-			
-			/** using this method for delay in seconds */
-			public void delay(int timesec) {
-				
-				long start = System.currentTimeMillis();
-				long end = start + timesec * 1000;
-				while (System.currentTimeMillis() < end)
-				{
-				   
-				}
-
 			}
-}
 
 
