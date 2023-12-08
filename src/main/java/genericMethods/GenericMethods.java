@@ -46,6 +46,6 @@ public class GenericMethods
 		}
 	
 
-	//added comment
-	//added 2nd comment
+	//added comment by vinay
+	//added 2nd comment by vinay
 }// closing bracket
