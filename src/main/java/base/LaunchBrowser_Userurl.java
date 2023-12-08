@@ -11,16 +11,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import genericMethods.GenericMethods;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class LaunchBrowser extends GenericMethods
+public class LaunchBrowser_Userurl extends GenericMethods
 {
 	/**This method purpose is to browser is opened maximised and url is lunched*/		
 	public WebDriver LaunchUrl() throws Exception
 	{
 		Properties obj = new Properties();
-		FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\ResourcesSpeardsheets\\config.properties");
+		FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\ResourcesSpreadsheets\\config.properties");
 		obj.load(fis);
 		String BrowserName = obj.getProperty("browser");
-		String URL = obj.getProperty("url");
+		String URL = obj.getProperty("User_url");
 		
 				if(BrowserName.equalsIgnoreCase("chrome"))
 					{
@@ -47,4 +47,21 @@ public class LaunchBrowser extends GenericMethods
 		
 		return driver; 
 	}
+	
+	//main  will enable to test this code LaunchBrowser with specific url 
+	/*
+	 
+	public static void main(String[] args) {
+		
+		LaunchBrowser lb = new LaunchBrowser();
+		try {
+			lb.LaunchUrl();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//LaunchUrl();
+	}
+	*/
+	
 }
