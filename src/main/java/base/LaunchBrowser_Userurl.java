@@ -49,18 +49,18 @@ public class LaunchBrowser_Userurl extends GenericMethods
 	}
 	
 	//main  will enable to test this code LaunchBrowser with specific url 
+	
 	/*
-	 
+	
 	public static void main(String[] args) {
 		
-		LaunchBrowser lb = new LaunchBrowser();
+		LaunchBrowser_Userurl lbU = new LaunchBrowser_Userurl();
 		try {
-			lb.LaunchUrl();
+			lbU.LaunchUrl();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		  e.printStackTrace();
 		}
-		//LaunchUrl();
+		
 	}
 	*/
 	
