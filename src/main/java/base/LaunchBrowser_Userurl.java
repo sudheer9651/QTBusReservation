@@ -1,16 +1,16 @@
 package base;
-
+ 
 import java.io.FileInputStream;
 import java.util.Properties;
-
+ 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
+ 
 import genericMethods.GenericMethods;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+ 
 public class LaunchBrowser_Userurl extends GenericMethods
 {
 	/**This method purpose is to browser is opened maximised and url is lunched*/		
@@ -38,14 +38,14 @@ public class LaunchBrowser_Userurl extends GenericMethods
 						 driver=new FirefoxDriver();
 					}
 				
-
+ 
 				
 				
 				
 		driver.manage().window().maximize();
 		driver.get(URL);
 		
-		return driver; 
+		return driver;
 	}
 	
 	//main  will enable to test this code LaunchBrowser with specific url here with user login
@@ -65,3 +65,4 @@ public class LaunchBrowser_Userurl extends GenericMethods
 	*/
 	
 }
+ 
