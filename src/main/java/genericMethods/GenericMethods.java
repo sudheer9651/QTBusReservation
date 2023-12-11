@@ -156,7 +156,20 @@ public class GenericMethods {
 	 * parameters "name" means storing different names.
 	 */
 
-	public void screenshot(String picName) {
+	public void screenshottimestamp(String picname) throws Exception
+	{
+	    LocalDateTime dateTime = LocalDateTime.now();
+  	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+  	    String timestamp = formatter.format(dateTime);
+
+  		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+  		File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+  		File destFile = new File("./ScreenShots/" +picname+timestamp +".png");
+  		FileUtils.copyFile(sourceFile, destFile);
+	}
+
+	
+/*	public void screenshot(String picName) {
 		try {
 
 			TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
@@ -169,7 +182,7 @@ public class GenericMethods {
 			e.printStackTrace();
 		}
 
-	}
+	}     */
 
 //		public boolean Screen_Shot(String name) throws Exception
 //		{

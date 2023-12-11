@@ -50,8 +50,8 @@ public class LaunchBrowser_Adminurl extends GenericMethods
 	
 	//main  will enable to test this code LaunchBrowser with specific url 
 	
-	/* 
-	public static void main(String[] args) {
+	
+/*	public static void main(String[] args) {
 		
 		LaunchBrowser_Adminurl lbA = new LaunchBrowser_Adminurl();
 		try {
@@ -60,7 +60,7 @@ public class LaunchBrowser_Adminurl extends GenericMethods
 			e.printStackTrace();
 		}
 		
-	}
-	*/
+	}  */
 	
-}
+	
+}   
