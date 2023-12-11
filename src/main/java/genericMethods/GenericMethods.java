@@ -165,12 +165,26 @@ public class GenericMethods {
 			FileUtils.copyFile(sourceFile, destFile);
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 
 	}
 
+	public void screenshottimestamp(String picname) throws Exception
+	{
+	    LocalDateTime dateTime = LocalDateTime.now();
+  	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+  	    String timestamp = formatter.format(dateTime);
+
+  		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+  		File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+  		File destFile = new File("./ScreenShots/" +picname+timestamp +".png");
+  		FileUtils.copyFile(sourceFile, destFile);
+	}
+
+	
+	
+	
 //		public boolean Screen_Shot(String name) throws Exception
 //		{
 //			try
