@@ -19,6 +19,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 
 public class GenericMethods {
 
@@ -27,6 +31,9 @@ public class GenericMethods {
 	 * interface
 	 */
 	public static WebDriver driver;
+	
+	
+	
 
 	/** this variable used for exceplity wait */
 	private WebDriverWait wait;
@@ -35,12 +42,17 @@ public class GenericMethods {
 	public String parentWindow;
 	public String childWindow;
 
+	//thisis Extent test object reference
+	public ExtentTest reporttestobj;
+	public ExtentReport extentreportobj;
+	
 	/**
 	 * this method is used for common clickable functionality in webapplication
 	 * <p>
 	 * elementlocator parameter is a webelement locator path in dom structure.
 	 */
-	public boolean clickElement(By elementLocator) {
+	public boolean clickElement(By elementLocator) 
+	{
 		WebElement ele = driver.findElement(elementLocator);
 		if (ele.isDisplayed() & ele.isEnabled()) {
 			try {
@@ -57,6 +69,34 @@ public class GenericMethods {
 		}
 
 	}
+	
+	public boolean DoubleClickelement(By elementlocator)
+	{	
+		Actions actions = new Actions(driver);
+		WebElement ele = driver.findElement(elementlocator);	
+		if (ele.isDisplayed() & ele.isEnabled()) 
+			{
+				try {
+					actions.doubleClick(ele).perform();
+					return true;
+				    } 
+				catch (Exception e) 
+					{
+						e.printStackTrace();
+						return false;
+					}
+			} else 
+					{
+						return false;
+					}
+
+		
+		
+		
+	}
+	
+	
+	
 
 	// it will help for page will go back
 
@@ -231,7 +271,7 @@ public class GenericMethods {
 	 * paramters are elementLocator means element path and index means dropdown
 	 * index value
 	 */
-	public boolean dropDownSelectIndex(By elementLocator, int index) {
+	public  boolean dropDownSelectIndex(By elementLocator, int index) {
 		if (elementEnable(elementLocator) & elementDisplay(elementLocator)) {
 			try {
 				Select drpCountry = new Select(driver.findElement(elementLocator));
@@ -268,6 +308,9 @@ public class GenericMethods {
 			return false;
 		}
 	}
+	
+	
+	
 
 	/**
 	 * This method used for Check Box the element...
@@ -340,15 +383,48 @@ public class GenericMethods {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0, num)");
 	}
-
-	// this method Highlight the background of elements
-
-	public static void highlight(WebElement element) {
-		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].setAttribute('style', 'border:2px solid red; background:yellow')",
-				element);
+	
+	//this method is not tried should be tried whther working or not
+	public void jsscroll_intoview(By elelocator) {
+		WebElement ele = driver.findElement(elelocator);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true)", ele);
+	}
+ 
+	//javascript click operation using By class
+	public void jsclick_By (By elelocator) {
+		WebElement ele = driver.findElement(elelocator);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();",ele);
 	}
 
+	//javascript click operation using By class
+	public void jsclick_Wele (WebElement elelocator) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();",elelocator);
+	}
+	
+	
+	
+	// this method Highlight the background of elements and redBorder
+	public void highlightwBG(WebElement element) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('style', 'border:2px solid red; background:yellow')",element);
+	}
+	
+	//this is used to highlight a webelement redBorder
+	public void highlight(WebElement element) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('style', 'border:2px solid red;')", element);
+			}
+	//this is used to highlight a By class element redBorder
+	public void highlight_By(By elementref) {
+		WebElement webele=driver.findElement(elementref);
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('style', 'border:2px solid red;')", webele);
+			}
+	
+	
 	/**
 	 * This method used for get the text from the table data...
 	 * <p>
@@ -460,17 +536,18 @@ public class GenericMethods {
 		return driver.getTitle();
 	}
 
-	/** using this method for delay in seconds */
-	public void delay(int timesec) 
+	/** using this method for delay in seconds  */
+		public void delay(double timesec) 
 	{
-
+		
 		long start = System.currentTimeMillis();
-		long end = start + timesec * 1000;
-		while (System.currentTimeMillis() < end) 
+		long end = (long) (start + timesec * 1000);
+		while (System.currentTimeMillis() < end) 	
 		{
 		}
-
+		
 	}
+
 
 	/** using this method for exceplicity wait */
 	public void Waits(int time) {
@@ -523,6 +600,27 @@ public class GenericMethods {
 	  		File destFile = new File("./ScreenShots/" +"Screenshot_"+timestamp +".png");
 	  		FileUtils.copyFile(sourceFile, destFile);
 		}
+	
+	
+	//this should be used @aftermethod annotation
+	 public void getResultAfterMethodd(ITestResult result) throws Exception {
+	        if(result.getStatus() == ITestResult.FAILURE) {
+	        	reporttestobj.log(Status.FAIL,result.getThrowable());
+	        }
+	        else if(result.getStatus() == ITestResult.SUCCESS) {
+	        	reporttestobj.log(Status.PASS, result.getTestName());
+	        }
+	        else {
+	        	reporttestobj.log(Status.SKIP, result.getTestName());
+	        }
+	    }
+	
+	 //this shloud be used @aftertest annotation
+		public void endExtentreportAfterTestt()
+		{
+			extentreportobj.flush();		
+		}
+
 	
 	
 }//closing bracket
